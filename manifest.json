@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Context Passport",
-  "version": "6.0",
+  "version": "8.0",
   "description": "Save and transfer AI context across tools",
   "permissions": [
     "storage",
