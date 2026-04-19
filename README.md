@@ -19,9 +19,9 @@ This happens on Claude, ChatGPT, Gemini, Cursor — every tool.
 
 ## The Solution
 
-Context Passport automatically reads your conversation and generates a structured summary:
+Context Passport automatically reads your conversation and generates a structured summary completely locally:
 
-```
+```text
 === CONTEXT PASSPORT ===
 PROJECT: Ecommerce App
 GOAL: Build a Next.js store with Stripe payments
@@ -48,6 +48,15 @@ CONTINUE: how do i handle failed payments
 ```
 
 Paste this into any new chat → AI instantly has full context → continue in seconds.
+
+---
+
+## What's New in v8 (Smart Local Engine)
+
+- **Massive Chat Support:** Seamlessly parses up to 200 messages natively. Automatically scales extraction limits dynamically so huge conversations are fully summarized without truncating data.
+- **Auto-Detect Project & Goal:** No typing required. The engine intelligently infers your Project Name and Goal directly from your initial chat messages.
+- **Hinglish & English Dual Support:** Upgraded offline keyword dictionaries now natively understand conversational Hinglish (e.g., `ho gaya`, `banana hai`, `mast chal raha`, `issue`) alongside English (`done`, `fixed`, `need to`, `resolved`).
+- **Resilient AI Web Support:** Employs vastly improved DOM selectors with cascading fallbacks to accurately parse ChatGPT, Claude, and Gemini even if they silently update their interfaces.
 
 ---
 
@@ -80,7 +89,7 @@ Paste this into any new chat → AI instantly has full context → continue in s
 
 1. Open any AI chat and have a conversation
 2. Click the **Context Passport** icon in your toolbar
-3. Fill in your **Project name** and **Goal** (optional but recommended)
+3. Optionally fill in your **Project name** and **Goal** (leave them blank and they will auto-detect!)
 4. Click **Generate Passport**
 5. Review and edit the detected items in the checklist
 6. Click **Claude / ChatGPT / Cursor / Gemini** to copy for your target tool
@@ -92,14 +101,14 @@ Paste this into any new chat → AI instantly has full context → continue in s
 
 | Field | What it captures |
 |---|---|
+| **PROJECT** | Auto-inferred project name from chat text |
+| **GOAL** | Auto-inferred user objective or task |
 | **STACK** | Tech keywords detected in the conversation |
 | **DONE** | Tasks the user marked as complete |
 | **NEXT** | User's requests, questions, and pending items |
 | **DECISIONS** | Architecture and tech choices made |
 | **LAST** | Summary of the last AI response |
 | **CONTINUE** | The last meaningful thing you asked |
-
-> **Tip:** The Goal field is the most important — fill it in for best results. Everything else is auto-detected.
 
 ---
 
@@ -114,12 +123,12 @@ Paste this into any new chat → AI instantly has full context → continue in s
 
 ## Files
 
-```
+```text
 context-passport/
 ├── manifest.json       # Extension config (Manifest V3)
 ├── background.js       # Service worker
-├── content.js          # Chat extraction (runs on AI sites)
-├── compress.js         # Compression engine
+├── content.js          # UI scraping and smart payload truncation
+├── compress.js         # Local compression engine & auto-detect AI
 ├── popup.html          # Extension UI
 ├── popup.js            # UI logic
 └── icons/              # Extension icons
